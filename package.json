@@ -1,0 +1,20 @@
+{
+  "name": "autoheal-test-target",
+  "version": "1.0.0",
+  "description": "AutoHeal CI test target with intentional errors",
+  "main": "src/broken.js",
+  "scripts": {
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0"
+  },
+  "keywords": ["autoheal", "ci", "testing"],
+  "author": "AutoHeal Agent",
+  "license": "MIT"
+}
