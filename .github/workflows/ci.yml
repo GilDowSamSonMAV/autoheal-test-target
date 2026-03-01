@@ -1,0 +1,50 @@
+name: AutoHeal CI Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  eslint:
+    name: ESLint Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npx eslint src/broken.js
+        continue-on-error: false
+
+  typescript:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Run TypeScript compiler
+        run: npx tsc --noEmit
+        continue-on-error: false
+
+  pytest:
+    name: Pytest Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run pytest
+        run: pytest tests/test_broken.py -v
+        continue-on-error: false
